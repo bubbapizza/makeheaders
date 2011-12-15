@@ -1,4 +1,49 @@
+==== Notes about the makeheaders program ====
+
 This is a simple autotools package for compiling and installing the 
-makeheaders command from the guy that wrote sqlite.  It reads through
-C and C++ source code and generates a .h or .hpp file containing the
-appropriate source code headers.
+makeheaders command.  The makeheaders command was written by the same
+guy that wrote sqlite.  
+
+The makeheaders command reads through C and C++ source code and generates 
+a .h or .hpp file containing the appropriate source code headers.
+
+
+==== Notes about autotools packages ====
+
+Autotools packages are super old school and work on just about every
+unix system known to mankind because the only thing you need to install
+one is a bourne shell.  
+
+In case you've never worked with them before, this package right here
+is the absolute simplest autotools package you could possibly find.   
+This whole package is built around ONE source code file.
+
+
+Here's a quick run down of how it works:
+
+If you see a file called 'bootstrap' in this directory, then you are 
+working with the developer's version of the package.   In that case,
+you must have the autoconf and automake packages installed, then 
+you have to run the following command:
+
+ ./bootstrap
+
+This will generate a 'configure' script and a Makefile.  Now you are at
+the point that a normal user would see if they had just extracted
+the distribution tarball.
+
+If you don't see a file called 'bootstrap' in this directory OR you
+have just run the above command, then run the following commands:
+
+ ./configure
+ make
+ sudo make install
+
+This will install the makeheaders command into /usr/local/bin and 
+you're all set to go.
+
+
+Shawn Wilson
+Dec 2011
+
+
