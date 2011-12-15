@@ -1,0 +1,4 @@
+This is a simple autotools package for compiling and installing the 
+makeheaders command from the guy that wrote sqlite.  It reads through
+C and C++ source code and generates a .h or .hpp file containing the
+appropriate source code headers.
