@@ -3223,8 +3223,7 @@ static unsigned int ModTime(const char *zFilename){
 /*
 ** Print a usage comment for this program.
 */
-static void Usage(const char *argv0, const char *argvN){
-  fprintf(stderr,"%s: Illegal argument \"%s\"\n",argv0,argvN);
+static void Usage(const char *argv0){
   fprintf(stderr,"Usage: %s [options] filename...\n"
     "Options:\n"
     "  -h          Generate a single .h to standard output.\n"
@@ -3275,6 +3274,12 @@ int main(int argc, char **argv){
   int noMoreFlags;      /* True if -- has been seen. */
   FILE *report;         /* Send progress reports to this, if not NULL */
 
+  /* If the user didn't enter any arguments, show the usage message. */
+  if (argc == 1) { 
+    Usage(argv[0]); 
+  }
+
+  /* Figure out what flags were specified. */
   noMoreFlags = 0;
   for(i=1; i<argc; i++){
     if( argv[i][0]=='-' && !noMoreFlags ){
@@ -3289,7 +3294,11 @@ int main(int argc, char **argv){
 #ifdef DEBUG
         case '!':   i++;  debugMask = strtol(argv[i],0,0); break;
 #endif
-        default:    Usage(argv[0],argv[i]); return 1;
+        default:    
+          fprintf(stderr,"%s: Illegal argument \"%s\"\n",
+                  argv[0], argv[i]);
+          Usage(argv[0]); 
+          return 1;
       }
     }else{
       pFile = CreateInFile(argv[i],&nErr);
